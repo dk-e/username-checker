@@ -29,7 +29,7 @@ async function main() {
         }
     }
 
-    console.log(chalk.blue(`\n${availableUsernames.length} usernames are available.`));
+    console.log(chalk.blue(`\n${availableUsernames.length} username(s) are available.`));
 }
 
 main();
