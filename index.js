@@ -12,11 +12,6 @@ function checkUsername(username) {
 }
 
 async function main() {
-    if (process.platform === "win32") {
-        const { execSync } = require('child_process');
-        execSync("title zurly x_x");
-    }
-
     const usernames = fs.readFileSync('usernames.txt', 'utf-8').split('\n').map(line => line.trim());
 
     const availableUsernames = [];
