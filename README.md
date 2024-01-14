@@ -1,6 +1,6 @@
-# GitHub Username Checker
+# Username Checker
 
-GitHub Username Checker written in JavaScript.
+Username Checker written in JavaScript.
 
 ## Prerequisites
 
