@@ -1,5 +1,6 @@
-const fs = require('fs');
-const https = require('https');
+import fs from 'fs'
+import https from 'https'
+import chalk from 'chalk'
 
 function checkUsername(username) {
     const url = `https://github.com/${username}`;
@@ -21,14 +22,14 @@ async function main() {
 
         if (isAvailable) {
             availableUsernames.push(username);
-            console.log(`The username '${username}' is available.`);
+            console.log(chalk.green(`The username '${username}' is available.`));
             fs.appendFileSync('available_usernames.txt', username + '\n');
         } else {
-            console.log(`The username '${username}' is not available.`);
+            console.log(chalk.redBright(`The username '${username}' is not available.`));
         }
     }
 
-    console.log(`\n${availableUsernames.length} usernames are available.`);
+    console.log(chalk.blue(`\n${availableUsernames.length} usernames are available.`));
 }
 
 main();
