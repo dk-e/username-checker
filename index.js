@@ -1,9 +1,15 @@
-import fs from 'fs'
-import https from 'https'
-import chalk from 'chalk'
+import fs from 'fs';
+import https from 'https';
+import chalk from 'chalk';
+import readline from 'readline';
 
-function checkUsername(username) {
-    const url = `https://github.com/${username}`;
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+function checkUsername(username, website) {
+    const url = `https://${website}/${username}`;
 
     return new Promise((resolve) => {
         https.get(url, (response) => {
@@ -13,12 +19,18 @@ function checkUsername(username) {
 }
 
 async function main() {
+    const website = await new Promise((resolve) => {
+            rl.question(chalk.blue('What website do you want to check? e.g. `github.com` '), (answer) => {
+                resolve(answer.trim());
+            });
+        });
+
     const usernames = fs.readFileSync('usernames.txt', 'utf-8').split('\n').map(line => line.trim());
 
     const availableUsernames = [];
 
     for (const username of usernames) {
-        const isAvailable = await checkUsername(username);
+        const isAvailable = await checkUsername(username, website);
 
         if (isAvailable) {
             availableUsernames.push(username);
@@ -30,6 +42,8 @@ async function main() {
     }
 
     console.log(chalk.blue(`\n${availableUsernames.length} username(s) are available.`));
+
+    rl.close();
 }
 
 main();
