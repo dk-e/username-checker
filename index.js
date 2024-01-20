@@ -1,29 +1,33 @@
 import fs from 'fs';
 import https from 'https';
 import chalk from 'chalk';
-import readline from 'readline';
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+import inquirer from 'inquirer';
 
 function checkUsername(username, website) {
     const url = `https://${website}/${username}`;
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         https.get(url, (response) => {
             resolve(response.statusCode === 404);
+        }).on('error', (err) => {
+            if (err.code === 'ENOTFOUND') {
+                reject(new Error(`The website '${website}' is not found.`));
+            } else {
+                reject(err);
+            }
         });
+    }).catch(err => {
+        console.log(chalk.redBright(err.message));
+        process.exit(1);
     });
 }
 
-async function main() {
-    const website = await new Promise((resolve) => {
-            rl.question(chalk.blue('What website do you want to check? e.g. `github.com` \n\u276f '), (answer) => {
-                resolve(answer.trim());
-            });
-        });
+async function main() { 
+    const { website } = await inquirer.prompt({
+        type: 'input',
+        name: 'website',
+        message: 'What website do you want to check? e.g. `github.com` \n\u276f'
+    });
 
     const usernames = fs.readFileSync('usernames.txt', 'utf-8').split('\n').map(line => line.trim());
 
@@ -42,10 +46,7 @@ async function main() {
     }
 
     console.log(chalk.blue(`\n${availableUsernames.length} username(s) are available.`));
-
-    rl.close();
 }
 
-
-
 main();
+
