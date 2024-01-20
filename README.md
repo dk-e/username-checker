@@ -16,4 +16,5 @@ Username Checker written in JavaScript.
 
 ## Notice
 
-Please be aware that some sites prevent this method of checking names. Consequently, the effectiveness of this approach may be limited in such cases.
+- Please be aware that some sites prevent this method of checking names. Consequently, the effectiveness of this approach may be limited in such cases.
+- Additionally, it is important to note that usernames that are considered "banned" may erroneously appear as available, despite being unavailable.
