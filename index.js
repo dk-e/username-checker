@@ -20,7 +20,7 @@ function checkUsername(username, website) {
 
 async function main() {
     const website = await new Promise((resolve) => {
-            rl.question(chalk.blue('What website do you want to check? e.g. `github.com` '), (answer) => {
+            rl.question(chalk.blue('What website do you want to check? e.g. `github.com` \n\u276f '), (answer) => {
                 resolve(answer.trim());
             });
         });
@@ -34,10 +34,10 @@ async function main() {
 
         if (isAvailable) {
             availableUsernames.push(username);
-            console.log(chalk.green(`The username '${username}' is available.`));
+            console.log(chalk.green(`\u276f The username '${username}' is available.`));
             fs.appendFileSync('available_usernames.txt', username + '\n');
         } else {
-            console.log(chalk.redBright(`The username '${username}' is not available.`));
+            console.log(chalk.redBright(`\u276f The username '${username}' is not available.`));
         }
     }
 
@@ -45,5 +45,7 @@ async function main() {
 
     rl.close();
 }
+
+
 
 main();
