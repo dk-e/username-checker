@@ -46,6 +46,7 @@ async function main() {
     }
 
     console.log(chalk.blue(`\n${availableUsernames.length} username(s) are available.`));
+    process.exit(1);
 }
 
 main();
