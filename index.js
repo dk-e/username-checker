@@ -30,9 +30,7 @@ async function main() {
 
     const start = Date.now();
 
-
     const usernames = fs.readFileSync('usernames.txt', 'utf-8').split('\n').map(line => line.trim());
-
     const availableUsernames = [];
 
     const checkUsernames = usernames.map(async (username) => {
@@ -50,7 +48,6 @@ async function main() {
     await Promise.all(checkUsernames);
 
     const plural = availableUsernames.length != 1 ? 'usernames' : 'username';
-
     console.log(chalk.blue(`\n${chalk.bold(availableUsernames.length)} ${plural} are available after ${chalk.bold((Date.now() - start) / 1000)} seconds.\n`));
     process.exit(0);
 }
