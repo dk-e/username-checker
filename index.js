@@ -1,9 +1,9 @@
 import fs from 'fs';
 import https from 'https';
 import chalk from 'chalk';
-import inquirer from 'inquirer';
+import input from '@inquirer/input';
 
-function checkUsername(username, website) {
+const checkUsername = async (username, website) => {
     const url = `https://${website}/${username}`;
 
     return new Promise((resolve, reject) => {
@@ -17,25 +17,25 @@ function checkUsername(username, website) {
             }
         });
     }).catch(err => {
-        console.log(chalk.redBright(err.message));
-        process.exit(1);
+        throw new Error(err.message);
     });
 }
 
-async function main() { 
-    const { website } = await inquirer.prompt({
-        type: 'input',
-        name: 'website',
-        message: 'What website do you want to check? e.g. `github.com` \n\u276f'
+async function main() {
+    console.clear();
+
+    const website = await input({
+        message: "What website do you want to check? e.g. 'github.com' \n\u276f"
     });
 
-    const usernames = fs.readFileSync('usernames.txt', 'utf-8').split('\n').map(line => line.trim());
+    const start = Date.now();
 
+    const usernames = fs.readFileSync('usernames.txt', 'utf-8').split('\n').map(line => line.trim());
     const availableUsernames = [];
 
-    for (const username of usernames) {
+    const checkUsernames = usernames.map(async (username) => {
         const isAvailable = await checkUsername(username, website);
-
+    
         if (isAvailable) {
             availableUsernames.push(username);
             console.log(chalk.green(`\u276f The username '${username}' is available.`));
@@ -43,10 +43,13 @@ async function main() {
         } else {
             console.log(chalk.redBright(`\u276f The username '${username}' is not available.`));
         }
-    }
+    });
+    
+    await Promise.all(checkUsernames);
 
-    console.log(chalk.blue(`\n${availableUsernames.length} username(s) are available.`));
-    process.exit(1);
+    const plural = availableUsernames.length != 1 ? 'usernames' : 'username';
+    console.log(chalk.blue(`\n${chalk.bold(availableUsernames.length)} ${plural} are available after ${chalk.bold((Date.now() - start) / 1000)} seconds.\n`));
+    process.exit(0);
 }
 
 main();
