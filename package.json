@@ -10,9 +10,6 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "devDependencies": {
-    "@types/node": "^20.11.0"
-  },
   "dependencies": {
     "chalk": "^5.3.0",
     "inquirer": "^9.2.12"
