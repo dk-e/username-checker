@@ -1,5 +1,5 @@
 {
-  "name": "gh-user-checker",
+  "name": "username-checker",
   "version": "1.0.0",
   "description": "A performant app to bulk check the availability of usernames",
   "main": "index.js",
