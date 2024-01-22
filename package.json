@@ -1,14 +1,19 @@
 {
   "name": "gh-user-checker",
   "version": "1.0.0",
-  "description": "",
+  "description": "A performant app to bulk check the availability of usernames",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Zurlyy",
+  "contributors": [
+    {
+      "name": "PeanutDumplings"
+    }
+  ],
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "@inquirer/input": "^1.2.14",
