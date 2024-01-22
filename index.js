@@ -48,7 +48,9 @@ async function main() {
     await Promise.all(checkUsernames);
 
     const plural = availableUsernames.length != 1 ? 'usernames are' : 'username was';
+    const plural2 = usernames.length != 1 ? 'usernames were' : 'username was';
     console.log(chalk.blue(`\n${chalk.bold(availableUsernames.length)} ${plural} available after ${chalk.bold((Date.now() - start) / 1000)} seconds.\n`));
+    console.log(chalk.yellow(`A total of ${chalk.bold(usernames.length)} ${plural2} checked.\n`));
     process.exit(0);
 }
 
