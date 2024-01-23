@@ -32,7 +32,7 @@ const checkUsername = (username, website) => __awaiter(void 0, void 0, void 0, f
             }
         });
     }).catch((err) => {
-        throw new Error(err.message);
+        throw new Error(err);
     });
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
