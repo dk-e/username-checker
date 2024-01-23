@@ -1,10 +1,12 @@
 {
     "name": "username-checker",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "A performant app to bulk check the availability of usernames",
-    "main": "index.js",
+    "main": "src/index.ts",
     "scripts": {
-        "dev": "nodemon index.js",
+        "dev": "nodemon --exec ts-node --files src/index.ts",
+        "build": "tsc",
+        "prod": "node dist/index.js",
         "format": "prettier --write \"**/*.{js,ts,md}\"",
         "lint": "eslint . --ext .js,.ts",
         "lint:fix": "eslint . --ext .js,.ts --fix"
@@ -17,15 +19,18 @@
         }
     ],
     "license": "MIT",
-    "type": "module",
     "dependencies": {
         "@inquirer/input": "^1.2.14",
-        "@typescript-eslint/eslint-plugin": "^6.19.1",
-        "@typescript-eslint/parser": "^6.19.1",
-        "chalk": "^5.3.0"
+        "chalk": "4.1.2"
     },
     "devDependencies": {
+        "@types/node": "^20.11.5",
+        "@typescript-eslint/eslint-plugin": "^6.19.1",
+        "@typescript-eslint/parser": "^6.19.1",
         "eslint": "^8.56.0",
-        "prettier": "^3.2.4"
+        "nodemon": "^3.0.3",
+        "prettier": "^3.2.4",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.3.3"
     }
 }
