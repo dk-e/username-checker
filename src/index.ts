@@ -3,7 +3,16 @@ import https from "https";
 import chalk from "chalk";
 import input from "@inquirer/input";
 
-const checkUsername = async (username, website) => {
+interface HttpsError extends Error {
+    code?: string;
+    errno?: string;
+    syscall?: string;
+    hostname?: string;
+    host?: string;
+    port?: number;
+}
+
+const checkUsername = async (username: string, website: string) => {
     const url = `https://${website}/${username}`;
 
     return new Promise((resolve, reject) => {
@@ -11,7 +20,7 @@ const checkUsername = async (username, website) => {
             .get(url, (response) => {
                 resolve(response.statusCode === 404);
             })
-            .on("error", (err) => {
+            .on("error", (err: HttpsError) => {
                 if (err.code === "ENOTFOUND") {
                     reject(new Error(`The website '${website}' is not found.`));
                 } else {
@@ -23,7 +32,7 @@ const checkUsername = async (username, website) => {
     });
 };
 
-async function main() {
+(async () => {
     console.clear();
 
     const website = await input({
@@ -36,7 +45,7 @@ async function main() {
         .readFileSync("usernames.txt", "utf-8")
         .split("\n")
         .map((line) => line.trim());
-    const availableUsernames = [];
+    const availableUsernames: string[] = [];
 
     const checkUsernames = usernames.map(async (username) => {
         const isAvailable = await checkUsername(username, website);
@@ -57,6 +66,4 @@ async function main() {
     console.log(chalk.blue(`\n${chalk.bold(availableUsernames.length)} ${plural} available.\n`));
     console.log(chalk.white(`It took ${chalk.bold.blue((Date.now() - start) / 1000)} seconds to check ${chalk.bold.blue(usernames.length)} ${pluralTotal}.\n`));
     process.exit(0);
-}
-
-main();
+})();
