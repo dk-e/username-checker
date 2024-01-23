@@ -28,7 +28,7 @@ const checkUsername = async (username: string, website: string) => {
                 }
             });
     }).catch((err) => {
-        throw new Error(err.message);
+        throw new Error(err);
     });
 };
 
