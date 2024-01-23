@@ -32,7 +32,7 @@ node index.js
 
 ## Example output
 
-![Screenshot of demonstration](./assets/demonstration.png)
+![Screenshot of demonstration](https://i.zurly.me/file/TbdfF.png)
 
 ## Installation from source
 
