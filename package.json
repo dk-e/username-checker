@@ -1,22 +1,31 @@
 {
-  "name": "username-checker",
-  "version": "1.0.0",
-  "description": "A performant app to bulk check the availability of usernames",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Zurlyy",
-  "contributors": [
-    {
-      "name": "PeanutDumplings"
+    "name": "username-checker",
+    "version": "1.0.0",
+    "description": "A performant app to bulk check the availability of usernames",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js",
+        "format": "prettier --write \"**/*.{js,ts,md}\"",
+        "lint": "eslint . --ext .js,.ts",
+        "lint:fix": "eslint . --ext .js,.ts --fix"
+    },
+    "keywords": [],
+    "author": "Zurlyy",
+    "contributors": [
+        {
+            "name": "PeanutDumplings"
+        }
+    ],
+    "license": "MIT",
+    "type": "module",
+    "dependencies": {
+        "@inquirer/input": "^1.2.14",
+        "@typescript-eslint/eslint-plugin": "^6.19.1",
+        "@typescript-eslint/parser": "^6.19.1",
+        "chalk": "^5.3.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.56.0",
+        "prettier": "^3.2.4"
     }
-  ],
-  "license": "MIT",
-  "type": "module",
-  "dependencies": {
-    "@inquirer/input": "^1.2.14",
-    "chalk": "^5.3.0"
-  }
 }
